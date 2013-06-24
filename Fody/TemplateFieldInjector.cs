@@ -12,7 +12,7 @@ public class TemplateFieldInjector
 
     public void AddField()
     {
-        ValidationTemplateField = TargetType.Fields.FirstOrDefault(x => x.Name == "validationTemplate");
+        ValidationTemplateField = TargetType.Fields.FirstOrDefault(x => x.Name == "ValidationTemplate");
         var fieldType = ValidationTemplateFinder.TypeReference;
         if (fieldType.HasGenericParameters)
         {
@@ -25,7 +25,7 @@ public class TemplateFieldInjector
             ValidationTemplateField.ValidateIsOfType(fieldType);
             return;
         }
-        ValidationTemplateField = new FieldDefinition("validationTemplate", FieldAttributes.Private, fieldType);
+        ValidationTemplateField = new FieldDefinition("ValidationTemplate", FieldAttributes.Public | FieldAttributes.InitOnly, fieldType);
         TargetType.Fields.Add(ValidationTemplateField);
         AddConstructor();
     }
